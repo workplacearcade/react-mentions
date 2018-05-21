@@ -440,23 +440,25 @@ class MentionsInput extends React.Component {
   }
 
   handleBlur = ev => {
-    const clickedSuggestion = this._suggestionsMouseDown
-    this._suggestionsMouseDown = false
-
-    // only reset selection if the mousedown happened on an element
-    // other than the suggestions overlay
-    if (!clickedSuggestion) {
-      this.setState({
-        selectionStart: null,
-        selectionEnd: null,
-      })
-    }
-
     window.setTimeout(() => {
-      this.updateHighlighterScroll()
-    }, 1)
+      const clickedSuggestion = this._suggestionsMouseDown
+      this._suggestionsMouseDown = false
 
-    this.props.onBlur(ev, clickedSuggestion)
+      // only reset selection if the mousedown happened on an element
+      // other than the suggestions overlay
+      if (!clickedSuggestion) {
+        this.setState({
+          selectionStart: null,
+          selectionEnd: null,
+        })
+      }
+
+      window.setTimeout(() => {
+        this.updateHighlighterScroll()
+      }, 1)
+
+      this.props.onBlur(ev, clickedSuggestion)
+    }, 300)
   }
 
   handleSuggestionsClick = ev => {
