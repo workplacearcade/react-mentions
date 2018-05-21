@@ -216,7 +216,7 @@ class MentionsInput extends React.Component {
         }}
         suggestions={this.state.suggestions}
         onSelect={this.addMention}
-        onMouseDown={this.handleSuggestionsMouseDown}
+        onClick={this.handleSuggestionsClick}
         onMouseEnter={focusIndex =>
           this.setState({
             focusIndex,
@@ -459,7 +459,7 @@ class MentionsInput extends React.Component {
     this.props.onBlur(ev, clickedSuggestion)
   }
 
-  handleSuggestionsMouseDown = ev => {
+  handleSuggestionsClick = ev => {
     this._suggestionsMouseDown = true
   }
 
