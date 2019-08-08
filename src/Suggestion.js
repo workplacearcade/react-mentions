@@ -18,7 +18,7 @@ class Suggestion extends Component {
         display: PropTypes.string,
       }),
     ]).isRequired,
-    descriptor: PropTypes.object.isRequired,
+    renderSuggestion: PropTypes.func,
 
     focused: PropTypes.bool,
   }
@@ -34,17 +34,18 @@ class Suggestion extends Component {
   }
 
   renderContent() {
-    let { query, descriptor, suggestion, index } = this.props
+    let { query, renderSuggestion, suggestion, index, focused } = this.props
 
     let display = this.getDisplay()
     let highlightedDisplay = this.renderHighlightedDisplay(display, query)
 
-    if (descriptor.props.renderSuggestion) {
-      return descriptor.props.renderSuggestion(
+    if (renderSuggestion) {
+      return renderSuggestion(
         suggestion,
         query,
         highlightedDisplay,
-        index
+        index,
+        focused
       )
     }
 
@@ -60,7 +61,7 @@ class Suggestion extends Component {
 
     let { id, display } = suggestion
 
-    if (!id || !display) {
+    if (id === undefined || !display) {
       return id
     }
 
